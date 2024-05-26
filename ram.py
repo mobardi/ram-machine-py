@@ -7,7 +7,7 @@ class RAM:
         self.program = None
         self.program_counter = 0
 
-    def parse(self, program_file): # Question 1
+    def parse(self, program_file):
         with open(program_file, 'r') as file:
             instructions = file.readlines()
         self.program = [self.parse_inst(inst.strip().split()) for inst in instructions]
@@ -18,14 +18,14 @@ class RAM:
         else:
             raise ValueError(f"Invalid instruction: {' '.join(inst)}")
         
-    def one_step(self, program, counter, input): # Question 2
+    def one_step(self, program, counter, input):
         self.parse(program)
         self.program_counter = counter
         for i in range(2):
             self.compute_inst(self.program[self.program_counter], input)
             counter+=1
             
-    def compute(self, program, input): # Question 3
+    def compute(self, program, input):
         self.parse(program)
         self.program_counter = 0
         while self.program_counter < len(self.program):
